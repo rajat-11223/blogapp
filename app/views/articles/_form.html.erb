@@ -1,0 +1,29 @@
+
+
+<%= form_for(@article) do |f| %>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+     
+    <%= f.text_field :title , class: "form-control", placeholder: "Enter Title", required: 'true' %>
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Body Text</label>
+    <%= f.text_area :body , class: "form-control", placeholder: "Enter text", required: 'true' %>
+  </div>
+
+<div class="form-group">
+    <label for="exampleInputEmail1">Article Image</label>
+    <%= f.file_field :article_image, class: "form-control" %>
+    
+ </div>
+<%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Tag List</label>
+  <%= f.text_area :tag_list, class: "form-control", placeholder: "Enter tag list", required: 'true'  %>
+  </div>
+  
+  
+    <%= f.submit nil, :class => "btn btn-primary" %>
+<% end %>
+

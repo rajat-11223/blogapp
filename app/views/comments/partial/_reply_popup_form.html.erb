@@ -1,0 +1,28 @@
+<div class="container">
+ 
+<%#= form_for "reply_commentssss" do |f| %>
+<%= form_for :reply_comment,  :url => { :action => :add_reply } do |f| %>
+ <div class="form-group">
+   
+   
+ <%= f.text_field :name , class: "form-control", placeholder: "Enter Name", required: 'true' %>
+ </div>
+ <input type="hidden" name="article_id" value= <%= params[:article_id] %> >
+  <div class="form-group">
+    
+    <%= f.text_area :message, class: "form-control", placeholder: "Your Comment" , required: 'true' %>
+    
+ </div>
+
+  
+   <div class="form-group">
+    <div class="row">
+        <div class="col-md-12 text-left">
+          <%= f.submit "Reply", :class=> "btn btn-primary" %>
+        </div>
+        
+  </div>
+  </div>
+<% end %>
+
+</div>

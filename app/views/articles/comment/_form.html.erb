@@ -1,0 +1,38 @@
+<div class="container">
+<hr>
+<center><h5 class="card-title">Post a Comment</h5></center> 
+<% if user_signed_in? %>
+  
+
+<%= form_for [ @article, @comment ] do |f| %>
+ <div class="form-group">
+   
+   <p> Hi, <%= current_user.name.capitalize %></p>
+ <%#= f.text_field :author_name , class: "form-control", placeholder: "Enter Name", required: 'true' %>
+ </div>
+  <div class="form-group">
+    
+    <%= f.text_area :body, class: "form-control", placeholder: "Your Comment" , required: 'true' %>
+    
+ </div>
+
+  
+   <div class="form-group">
+    <div class="row">
+        <div class="col-md-6">
+          <%= f.submit nil, :class=> "btn btn-primary" %>
+        </div>
+        <div class="col-md-6 text-right">
+        <%#= link_to "<< Back", articles_path, class: "btn btn-primary" %>
+      </div>
+  </div>
+  </div>
+<% end %>
+<% else %>
+<div class="form-group">
+  <center><p> You must have to login to post a comment? </p></center>
+  <center><%= link_to "Log in", "/users/sign_in",:class => "btn btn-primary" %></center>
+</div>
+<% end %>
+
+</div>

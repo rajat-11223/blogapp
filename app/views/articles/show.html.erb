@@ -1,0 +1,63 @@
+
+
+<div class="container">
+
+
+<div class="row">
+	<div class="col-md-6">
+
+
+<div class="card" style="width: 30rem;">
+  
+  <% if @article.article_image.present? %>
+   <%= image_tag @article.article_image.url, class: "card-img-top",style: "height: 400px;"%>
+   <% else %>
+   <img class="card-img-top" src="/assets/No_Image.png" alt="Card image cap",style="height: 400px;" >
+  <% end %>
+  
+  <div class="card-body">
+  	<span class="float_right">
+  <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>
+'.html_safe, edit_article_path(@article.id),title: "Edit" %>
+     <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, article_path(@article.id),title: "Delete", method: :delete, data: {confirm: "Are you sure?"} %></span>
+    <h5 class="card-title"><%= @article.title %></h5>
+    <% if @article.tags.present? %>
+    <i class="fa fa-tags" aria-hidden="true"></i>  <%= @article.tag_list %>
+    
+  <% end %>
+
+    <p class="card-text mt-4"><%= @article.body %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    
+    <%= render partial: 'articles/comment/form' %>
+ 
+  </ul>
+  
+</div>
+</div>
+
+
+<div class="col-md-6">	
+<div class="card text-center" style="width: 30rem;">
+  <div class="card-header">
+   <h4> Comments (<%= @article.comments.count %>) </h4>
+  </div>
+
+  <div class="card-body">
+
+     <%= render partial: 'articles/comment/my_comment', collection: @article.comments %>
+  
+</div>
+
+
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+
+

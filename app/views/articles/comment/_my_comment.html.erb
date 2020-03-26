@@ -1,0 +1,52 @@
+ <h6 class="card-text text-left"><%= my_comment.body %></h6>
+
+  <p class="text-left"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%= @article.user.name.present? ? @article.user.name.capitalize : my_comment.author_name.capitalize %> <i class="fa fa-clock-o" aria-hidden="true"></i> <% if @comment.article.present? %> Posted <%= distance_of_time_in_words( Time.now, my_comment.created_at) %> ago <% end %>  
+</p>
+
+<div class="container">
+
+	<% if my_comment.reply_comment.present? %>
+	<% my_comment.reply_comment.each do |vv| %>
+         <h6 class="card-text text-left"><%= vv.message %></h6>
+<small><p class="text-left"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%= vv.name %> <i class="fa fa-clock-o" aria-hidden="true"></i> Posted <%= distance_of_time_in_words( Time.now, vv.created_at) %> ago </p></small>
+	
+<% end %>
+<% end %>	
+
+</div>
+ <% if user_signed_in? %>
+<p class="text-right">  
+<%= link_to reply_popup_path(:article_id => my_comment.id), method: :post, class: 'link-delete', :remote => true do %>
+  Reply
+<% end %><span>/</span>
+
+<%= link_to 'Delete', delete_comment_path(:comment_id => my_comment.id),title: "Delete", method: :post, data: {confirm: "Are you sure?"} %>
+</p>
+<% end %>
+
+<hr>
+ 
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"> Post a Reply</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body model_popup">
+          
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
