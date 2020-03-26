@@ -13,15 +13,38 @@ Rails.application.configure do
  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
 
- ActionMailer::Base.smtp_settings = {
+
+#config.action_mailer.smtp_settings = {
+#    :enable_starttls_auto => true,
+#    :address        => 'smtp.gmail.com',
+#    :port           => 587,
+#    :domain         => 'poplify.com',
+#    :authentication => :plain,
+#    :user_name      => 'rajat@poplify.com',
+#    :password       => 'rajatpoplify11223'
+#}
+
+
+ActionMailer::Base.smtp_settings = {
   address: 'smtp.sendgrid.net',
   port: 587,
   domain: 'poplify.com',
-  user_name: 'adminpoplify',
-  password: 'poplification123',
+  user_name: 'rajat76',
+  password: 'rajat11223',
   authentication: :login,
   enable_starttls_auto: true
 }
+
+# config.action_mailer.smtp_settings = {
+#  address: 'smtp.gmail.com',
+#  port: 587,
+#  domain: 'poplify.com',
+#  user_name: 'rajat@poplify.com',
+#  password: 'rajatpoplify11223',
+#  authentication: :plain
+#  #enable_starttls_auto: true,
+#  #openssl_verify_mode: 'none'
+#}
   # Show full error reports.
   config.consider_all_requests_local = true
 

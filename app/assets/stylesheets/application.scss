@@ -192,14 +192,25 @@ ul.navbar-nav.float_right {
 .float_right {
 	float: right;
 }
+.text_center .pagination {
+	justify-content: center;
+}
 
 
+.text_center .pagination a, .text_center .pagination span, .text_center .pagination .current {
+	padding: 10px 10px 10px 10px;
+	border: 2px solid #000;
+	border-radius: 24px;
+	margin: 0px 5px 0px 5px;
+}
 
+a[rel="next"] {
+    color: #86c33a;
+}
 
-
-
-
-
+a[rel="prev"] {
+    color: #86c33a;
+}
 
 
 

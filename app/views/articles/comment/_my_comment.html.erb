@@ -1,6 +1,6 @@
  <h6 class="card-text text-left"><%= my_comment.body %></h6>
 
-  <p class="text-left"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%= @article.user.name.present? ? @article.user.name.capitalize : my_comment.author_name.capitalize %> <i class="fa fa-clock-o" aria-hidden="true"></i> <% if @comment.article.present? %> Posted <%= distance_of_time_in_words( Time.now, my_comment.created_at) %> ago <% end %>  
+  <p class="text-left"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%= my_comment.user.name.present? ? my_comment.user.name.capitalize : "--" %> <i class="fa fa-clock-o" aria-hidden="true"></i> <% if @comment.article.present? %> Posted <%= distance_of_time_in_words( Time.now, my_comment.created_at) %> ago <% end %>  
 </p>
 
 <div class="container">
@@ -8,23 +8,49 @@
 	<% if my_comment.reply_comment.present? %>
 	<% my_comment.reply_comment.each do |vv| %>
          <h6 class="card-text text-left"><%= vv.message %></h6>
-<small><p class="text-left"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%= vv.name %> <i class="fa fa-clock-o" aria-hidden="true"></i> Posted <%= distance_of_time_in_words( Time.now, vv.created_at) %> ago </p></small>
+<small><p class="text-left"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%= vv.user.name %> <i class="fa fa-clock-o" aria-hidden="true"></i> Posted <%= distance_of_time_in_words( Time.now, vv.created_at) %> ago </p></small>
 	
 <% end %>
 <% end %>	
 
 </div>
- <% if user_signed_in? %>
-<p class="text-right">  
-<%= link_to reply_popup_path(:article_id => my_comment.id), method: :post, class: 'link-delete', :remote => true do %>
-  Reply
-<% end %><span>/</span>
 
-<%= link_to 'Delete', delete_comment_path(:comment_id => my_comment.id),title: "Delete", method: :post, data: {confirm: "Are you sure?"} %>
+ <% if user_signed_in? %>
+
+ 
+<%#= form_for "reply_commentssss" do |f| %>
+<form class="form-inline" method="POST" id ="formreply-button<%= my_comment.id %>" >
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <textarea class="form-control" name="reply_message" id="exampleFormControlTextarea1" cols="28" rows="2"></textarea>
+     
+    </div>
+      <input type="hidden" id="article_id" name="article_id" value= <%= my_comment.id %> >
+    
+    <%#= text_area :message, class: "form-control", placeholder: "Your Comment" , required: 'true' %>
+    
+
+  
+   <div class="col-auto">
+      <button type="button" id="reply-button<%= my_comment.id %>" onclick="replycomment(this.id)" class="btn btn-primary mb-2">Reply</button>
+    </div>
+    </div>
+</form>
+<%#= link_to 'Delete', delete_comment_path(:comment_id => my_comment.id),title: "Delete", method: :post, data: {confirm: "Are you sure?"},class: "btn btn-danger mb-2" %>
+
+
+
+<p class="text-right">  
+<%#= link_to reply_popup_path(:article_id => my_comment.id), method: :post, class: 'link-delete', :remote => true do %>
+  
+<%# end %>
+
+<%#= link_to 'Delete', delete_comment_path(:comment_id => my_comment.id),title: "Delete", method: :post, data: {confirm: "Are you sure?"} %>
 </p>
 <% end %>
-
 <hr>
+
  
 
 <div class="modal" id="myModal">
@@ -44,9 +70,11 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" id="reply-button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         
       </div>
     </div>
   </div>
+
+
